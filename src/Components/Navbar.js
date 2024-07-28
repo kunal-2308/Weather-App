@@ -1,6 +1,25 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
+import MainContext from "../Context/MainContext";
 function Navbar() {
+  let context = useContext(MainContext);
+  let {setLocation} = context;
+
+  let data = "";
+
+  let setInput = (e) =>{
+    e.preventDefault();
+    data = e.target.value;
+  }
+
+  console.log(data);
+
+  let setData = (e)=>{
+    e.preventDefault();
+    setLocation(data);
+  }
+
+  
   return (
     <>
       <div className="main-container bg-white max-w-full h-16 flex justify-around px-4 md:pd-4 items-center">
@@ -25,8 +44,8 @@ function Navbar() {
 
         <div className="input-div invisible md:visible ">
           <label className="form-control w-full max-w-xs flex flex-row justify-center items-center">
-          <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" />
-            <button className="btn btn-sm h-12 mx-3">Search</button>
+          <input type="text" placeholder="Type here" className="input input-bordered w-full max-w-xs" onChange={setInput}/>
+            <button className="btn btn-sm h-12 mx-3" onClick={setData}>Search</button>
           </label>
         </div>
 
